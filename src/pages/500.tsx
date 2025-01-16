@@ -12,7 +12,7 @@ export default function ServerError() {
               <p className="text-base font-semibold text-primary">500</p>
               <PageTitle>Internal Server Error</PageTitle>
               <p className="mt-2 text-base text-gray-500">
-                Sorry, my server is having some issues.
+                It&aposs not you. It&aposs me. We&aposre having some server issues.
               </p>
               <div className="mt-6">
                 <Link href="/" className="text-base font-medium hover:text-primary">
