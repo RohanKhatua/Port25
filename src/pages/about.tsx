@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import React, { useEffect, useMemo, useState } from 'react';
 
-import AvatarImage from '../../public/assets/blog/authors/bartosz.jpeg';
+import AvatarImage from '../../public/assets/blog/authors/rohan.jpeg';
 import { Container } from '../components/Container';
 import { ExternalLink } from '../components/ExternalLink';
 import { PageTitle } from '../components/PageTitle';

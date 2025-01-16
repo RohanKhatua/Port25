@@ -30,7 +30,7 @@ export const NavigationItems = [
   },
   {
     name: 'Resume',
-    href: 'https://cv.jarocki.me',
+    href: 'https://resume.rohankhatua.dev',
     type: 'external',
   },
   {

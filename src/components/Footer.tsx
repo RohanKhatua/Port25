@@ -18,7 +18,7 @@ export const Footer = () => {
                 ))}
               </div>
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Bartosz Jarocki. All rights reserved.
+                &copy; {new Date().getFullYear()} Rohan Khatua. All rights reserved.
               </p>
             </div>
           </Container.Inner>

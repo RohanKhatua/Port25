@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://jarocki.me
+Host: https://rohankhatua.dev
 
 # Sitemaps
-Sitemap: https://jarocki.me/sitemap.xml
+Sitemap: https://rohankhatua.dev/sitemap.xml

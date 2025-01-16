@@ -20,7 +20,7 @@ const generateImage = async (req: NextRequest) => {
     (
       <main tw="h-full w-full bg-[#FB2576] pb-1 flex flex-col">
         <div tw="w-full h-full flex flex-col items-start justify-start bg-zinc-900 text-zinc-100 p-8">
-          <div tw="self-end text-2xl text-zinc-500">jarocki.me</div>
+          <div tw="self-end text-2xl text-zinc-500">rohankhatua.dev</div>
           <div tw="w-full mt-auto flex items-start justify-start">
             <div tw="flex flex-col mt-auto max-w-2xl">
               <h1 tw="text-5xl mt-auto">{title}</h1>
@@ -28,7 +28,7 @@ const generateImage = async (req: NextRequest) => {
             </div>
             <img
               tw="rounded-lg w-32 h-32 self-end ml-auto"
-              src="https://jarocki.me/assets/blog/authors/bartosz.jpeg"
+              src="https://rohankhatua.dev/assets/blog/authors/rohan.jpeg"
               alt="Avatar"
             />
           </div>
