@@ -2,8 +2,31 @@ import { TextRichTextItemResponse } from '@notionhq/client/build/src/api-endpoin
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { InlineMath, BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 
 import { Quote } from '../Quote';
+
+type RichTextItemResponse = {
+  type: 'text' | 'equation';
+  text?: {
+    content: string;
+    link: { url: string; } | null;
+  };
+  equation?: {
+    expression: string;
+  };
+  annotations: {
+    bold: boolean;
+    italic: boolean;
+    strikethrough: boolean;
+    underline: boolean;
+    code: boolean;
+    color: string;
+  };
+  plain_text: string;
+  href: string | null;
+};
 
 type Block = {
   type: string;
@@ -14,14 +37,35 @@ type Block = {
       type: string;
       emoji?: string;
     };
-    rich_text: TextRichTextItemResponse[];
+    rich_text: RichTextItemResponse[];
     children?: Block[];
+  };
+  equation?: {
+    expression: string;
+  };
+  table?: {
+    table_width: number;
+    has_column_header: boolean;
+    has_row_header: boolean;
+  };
+  table_row?: {
+    cells: RichTextItemResponse[][];
+  };
+  column_list?: {
+    children: Block[];
+  };
+  column?: {
+    children: Block[];
   };
 };
 
 type Props = {
   block: Block;
 };
+
+function isTableRow(block: Block): block is Block & { table_row: { cells: RichTextItemResponse[][] } } {
+  return 'table_row' in block && block.table_row !== undefined;
+}
 
 export const NotionBlockRenderer = ({ block }: Props) => {
   const { type, id } = block;
@@ -73,10 +117,9 @@ export const NotionBlockRenderer = ({ block }: Props) => {
       return (
         <li className="pl-0 text-gray-800 dark:text-gray-200">
           <NotionText textItems={value.rich_text} />
-          {!!value.children &&
-            value.children.map((block: Block) => (
-              <NotionBlockRenderer key={block.id} block={block} />
-            ))}
+          {value.children?.map((block: Block) => (
+            <NotionBlockRenderer key={block.id} block={block} />
+          ))}
         </li>
       );
     case 'to_do':
@@ -189,6 +232,75 @@ export const NotionBlockRenderer = ({ block }: Props) => {
           </div>
         </div>
       );
+    case 'equation':
+      return (
+        <div className="my-4 text-gray-800 dark:text-gray-200">
+          <BlockMath>{value.expression}</BlockMath>
+        </div>
+      );
+    case 'table':
+      return (
+        <div className="overflow-hidden rounded-md border border-gray-200 dark:border-gray-700">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              {value.has_column_header && (
+                <thead className="bg-gray-100 dark:bg-gray-800">
+                  <tr>
+                    {value.children[0].table_row.cells.map((cell: RichTextItemResponse[], cellIndex: number) => (
+                      <th
+                        key={cellIndex}
+                        className="px-2 py-1 font-medium text-gray-900 dark:text-gray-100"
+                      >
+                        <NotionText textItems={cell} />
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+              )}
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                {value.children.slice(value.has_column_header ? 1 : 0).map((row: Block, rowIndex: number) => (
+                  isTableRow(row) ? (
+                    <tr
+                      key={rowIndex}
+                      className="hover:bg-gray-50 dark:hover:bg-gray-800 transition duration-200"
+                    >
+                      {row.table_row.cells.map((cell: RichTextItemResponse[], cellIndex: number) => (
+                        <td
+                          key={cellIndex}
+                          className="px-2 py-1 text-gray-700 dark:text-gray-300 align-top"
+                        >
+                          <NotionText textItems={cell} />
+                        </td>
+                      ))}
+                    </tr>
+                  ) : null
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+
+    case 'column_list':
+      return (
+        <div className="flex flex-col md:flex-row gap-4 my-4">
+          {value.children?.map((column: Block, columnIndex: number) => (
+            <div key={columnIndex} className="flex-1">
+              {column.children?.map((block: Block) => (
+                <NotionBlockRenderer key={block.id} block={block} />
+              ))}
+            </div>
+          )) || null}
+        </div>
+      );
+    case 'column':
+      return (
+        <>
+          {value.children?.map((block: Block) => (
+            <NotionBlockRenderer key={block.id} block={block} />
+          )) || null}
+        </>
+      );
     default:
       return (
         <p className="text-red-600 dark:text-red-400">
@@ -198,21 +310,30 @@ export const NotionBlockRenderer = ({ block }: Props) => {
   }
 };
 
-const NotionText = ({ textItems }: { textItems: TextRichTextItemResponse[] }) => {
+const NotionText = ({ textItems }: { textItems: RichTextItemResponse[] }) => {
   if (!textItems) {
     return null;
   }
 
   return (
     <>
-      {textItems.map((textItem) => {
+      {textItems.map((textItem, index) => {
         const {
           annotations: { bold, code, color, italic, strikethrough, underline },
-          text,
+          plain_text,
+          href,
         } = textItem;
+
+        let content;
+        if (textItem.type === 'equation') {
+          content = <InlineMath>{textItem.equation?.expression || ''}</InlineMath>;
+        } else {
+          content = plain_text;
+        }
+
         return (
           <span
-            key={text.content}
+            key={index}
             className={clsx({
               'font-bold': bold,
               'font-mono text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-1 py-0.5 rounded': code,
@@ -222,12 +343,12 @@ const NotionText = ({ textItems }: { textItems: TextRichTextItemResponse[] }) =>
             })}
             style={color !== 'default' ? { color } : {}}
           >
-            {text.link ? (
-              <a href={text.link.url} className="text-blue-600 hover:underline dark:text-blue-400">
-                {text.content}
+            {href ? (
+              <a href={href} className="text-blue-600 hover:underline dark:text-blue-400">
+                {content}
               </a>
             ) : (
-              text.content
+              content
             )}
           </span>
         );
