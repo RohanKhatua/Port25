@@ -20,13 +20,15 @@ import TastyCloudLogo from '../images/logos/tastycloud.png';
 import YearProgressLogo from '../images/logos/yearprogress.svg';
 import Minimal from '../images/logos/minimal.svg';
 import { LinkedInIcon } from '../components/icons/LinkedInIcon';
+import WellsFargoLogo from '../images/logos/wells-fargo-logo.png'
 
-export const Name = 'Bartosz Jarocki';
+export const Name = 'Rohan Khatua';
 
 export const About = (
   <>
-    {`I used to consider myself a software engineer, but the reality is that I simply enjoy creating things. If you'd like to get in touch,`}{' '}
-    <ExternalLink href="mailto:bartosz@jarocki.me">send me an email.</ExternalLink>
+    <span>Software Engineer - Full Stack Dev. F1 and Chess Addict.</span>
+    <br />
+    <span><ExternalLink href="mailto:contact@rohankhatua.dev">Get In Touch 🚀</ExternalLink></span>
   </>
 );
 export const AboutExtended = `I live in Wrocław, Poland, having grown up in the small town of Góra in the western part of the country. I have a bachelor's degree in Control Systems Engineering and Robotics from the Wrocław University of Technology. I like programming, books, plants, mountain biking, whisky, and traveling the world with my wife, Kasia. The cosmos fascinates me, and I take great delight in gazing at the stars.`;
@@ -185,63 +187,26 @@ export const MyPastProjects: Project[] = [
 ];
 
 export const SocialMedia = [
-  { name: 'Twitter', link: 'https://twitter.com/BartoszJarocki', icon: XIcon },
-  { name: 'Instagram', link: 'https://www.instagram.com/bartosz.jarocki/', icon: InstagramIcon },
-  { name: 'Github', link: 'https://github.com/BartoszJarocki', icon: GitHubIcon },
-  { name: 'LinkedIn', link: 'https://www.linkedin.com/in/bjarocki', icon: LinkedInIcon },
+  { name: 'X / Twitter', link: 'https://x.com/Krutons_05', icon: XIcon },
+  { name: 'Instagram', link: 'https://www.instagram.com/rohankhatua6/', icon: InstagramIcon },
+  { name: 'Github', link: 'https://github.com/RohanKhatua', icon: GitHubIcon },
+  { name: 'LinkedIn', link: 'https://www.linkedin.com/in/rohankhatua', icon: LinkedInIcon },
 ] as const;
 
 export const Work = [
   {
-    company: 'Parabol',
-    title: 'Full Stack Developer',
-    logo: ParabolLogo,
-    start: '2021',
-    end: '2024',
-  },
-  {
-    company: 'Clevertech',
-    title: 'Lead Android Developer → Full Stack Developer',
-    logo: ClevertechLogo,
-    start: '2015',
-    end: '2021',
-  },
-  {
-    company: 'Jojo Mobile',
-    title: 'Android Developer → Lead Android Developer',
-    logo: JojoMobileLogo,
-    start: '2012',
-    end: '2015',
-  },
-  {
-    company: 'Nokia Siemens Networks',
-    title: 'C/C++ Developer',
-    logo: NSNLogo,
-    start: '2010',
-    end: '2012',
-  },
+    company: 'Wells Fargo & Company',
+    title: 'Intern Analyst',
+    logo: WellsFargoLogo,
+    start: '2024',
+    end: 'Present',
+  }
 ] as const;
 
 export const CompaniesLinks = [
   {
-    name: 'VisionMedia',
-    link: 'https://www.visionmedia.com/',
-  },
-  {
-    name: 'DKMS',
-    link: 'https://www.dkms.org/en',
-  },
-  {
-    name: 'AAA',
-    link: 'https://www.aaa.com/',
-  },
-  {
-    name: 'PolskaPress',
-    link: 'https://polskapress.pl/pl',
-  },
-  {
-    name: 'Canal Digital',
-    link: 'https://www.canaldigital.no/',
+    name: 'Wells Fargo & Company',
+    link: 'https://www.wellsfargo.com/',
   },
 ] as const;
 

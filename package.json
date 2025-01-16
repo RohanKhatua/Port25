@@ -15,17 +15,20 @@
     "@heroicons/react": "^2.0.18",
     "@mapbox/rehype-prism": "^0.8.0",
     "@notionhq/client": "^2.2.3",
+    "@radix-ui/react-slot": "^1.1.1",
     "@tailwindcss/typography": "^0.5.7",
     "@types/prismjs": "^1.26.0",
     "@types/react-katex": "^3.0.4",
     "@vercel/analytics": "^1.0.2",
     "@vercel/og": "^0.5.17",
+    "class-variance-authority": "^0.7.1",
     "classnames": "^2.3.1",
-    "clsx": "^2.0.0",
+    "clsx": "^2.1.1",
     "date-fns": "2.30.0",
     "focus-visible": "^5.2.0",
     "framer-motion": "^10.16.4",
     "geist": "^1.0.1",
+    "lucide-react": "^0.471.1",
     "next": "^14.0.1",
     "next-themes": "^0.2.0",
     "plaiceholder": "^3.0.0",
@@ -36,7 +39,9 @@
     "react-dom": "^18.2.0",
     "react-katex": "^3.0.1",
     "rss": "^1.2.2",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
@@ -54,7 +59,7 @@
     "postcss": "^8.4.14",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
-    "tailwindcss": "^3.3.2",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5.2.2"
   },
   "license": "MIT"

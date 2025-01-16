@@ -1,4 +1,3 @@
-import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import React, { useEffect, useMemo, useState } from 'react';
